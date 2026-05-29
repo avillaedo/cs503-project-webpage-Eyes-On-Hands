@@ -535,22 +535,33 @@
             </p>
           
             <h3 class="title is-4">Training Objectives</h3>
-          
+            
             <p>
-              The overall framework is trained in a multi-task setting combining gaze-following
-              and LAHand objectives.
+            The overall framework is trained in a multi-task setting combining gaze-following and LAHand objectives.
             </p>
-          
+            
+            <p>
+            For the LAHand task, we use a masked binary classification objective applied over all valid person-hand pairs:
+            </p>
+            
             <p>
             \[
             \mathcal{L}_{LAHand}
             =
             \frac{1}{|\Omega|}
             \sum_{(i,j)\in\Omega}
-            \ell_{\text{focal}}(s_{ij}, y_{ij})
+            \ell_{BCE}(\hat{y}_{ij}, y_{ij}).
             \]
             </p>
-          
+            
+            <p>
+            In addition, we introduce an auxiliary hand-center regression loss that encourages the model to localize attended hands more accurately.
+            </p>
+            
+            <p>
+            The final training objective is defined as:
+            </p>
+            
             <p>
             \[
             \mathcal{L}
@@ -561,7 +572,7 @@
             +
             \lambda_{LAHand}\mathcal{L}_{LAHand}
             +
-            \lambda_{center}\mathcal{L}_{center}
+            \lambda_{center}\mathcal{L}_{center}.
             \]
             </p>
           </div>

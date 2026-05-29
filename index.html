@@ -68,10 +68,10 @@
 <!------------------------------------------------------------------------->
 
 <!--TODO: THE LINKS RELATED TO THE PROJECT -->
-          <div class="column has-text-centered">
-            <div class="publication-links">
+          <!-- <div class="column has-text-centered">
+            <div class="publication-links"> -->
               <!-- PDF Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://arxiv.org"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -79,9 +79,9 @@
                   </span>
                   <span>Document</span>
                 </a>
-              </span>
+              </span> -->
               <!-- YouTube Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://www.youtube.com"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -89,9 +89,9 @@
                   </span>
                   <span>Video</span>
                 </a>
-              </span>
+              </span> -->
               <!-- GitHub Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://github.com/tarhanefe/cs503-project-template"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -99,9 +99,9 @@
                   </span>
                   <span>Project Code</span>
                   </a>
-              </span>
+              </span> -->
               <!-- Dataset Link. -->
-                <span class="link-block">
+                <!-- <span class="link-block">
                   <a href="https://drive.google.com/drive/folders/13W_453e-h2TWAfAnp6Ga00TYwEzTnMtg?usp=sharing"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -109,9 +109,9 @@
                     </span>
                     <span>Dataset/Drive</span>
                   </a>
-                </span>
+                </span> -->
               <!-- GitHub Website Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="https://github.com/tarhanefe/cs503-project-template"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -128,14 +128,14 @@
     </div>
   </div>
 </section>
-<!------------------------------------------------------------------------->
+--------------------------------------------------------------------- -->
 
 <!--TODO: THE LINKS RELATED TO THE PROJECT -->
 <!--
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <!-- TODO: Replace with your teaser image, gif or video file. Choose something that represents your project. -->
+       <!-- TODO: Replace with your teaser image, gif or video file. Choose something that represents your project. --> 
       <video id="teaser" autoplay muted loop playsinline height="100%">
         <!-- <source src="./static/videos/teaser.mp4"
                 type="video/mp4"> -->
@@ -148,7 +148,6 @@
     </div>
   </div>
 </section>
--->
 
 <!------------------------------------------------------------------------->
 
@@ -210,7 +209,7 @@
             <div class="tile is-parent">
               <a href="#results" class="tile is-child box">
                 <p class="subtitle">
-                  <font size="-1">Results</font>
+                  <font size="-1">Experiments and Results</font>
                 </p>
               </a>
             </div>
@@ -573,7 +572,7 @@
       <!-- Results. -->
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3" id="results">IV. Results</h2>
+          <h2 class="title is-3" id="results">IV. Experiments and Results</h2>
           <div class="content has-text-justified">
 
             <h3 class="title is-4">Datasets</h3>
@@ -697,9 +696,8 @@
             </p>
           
             <p>
-              (i) minimum distance,
-              (ii) average distance,
-              and (iii) area under the ROC curve (AUC)
+              (i) minimum distance and 
+              (ii) average distance
               for gaze prediction.
             </p>
           
@@ -1127,6 +1125,7 @@
               is especially beneficial for understanding attention
               in socially and physically interactive environments.
             </p>
+            <p>Further qualitative examples are provided in the supplementary material.</p>
           </div>
         </div>
       </div>
@@ -1186,13 +1185,12 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
 
-        <h2 class="title is-3" id="supplementary">Supplementary Qualitative Results</h2>
+        <h2 class="title is-3" id="supplementary">Supplementary Material</h2>
 
         <div class="content has-text-justified">
           <p>
-            This supplementary section provides additional qualitative examples grouped by the type of ambiguity or failure mode.
-            Each group illustrates a recurring behavior observed when comparing the gaze-following baseline against MTGS-Hand.
-          </p>
+            This supplementary section provides additional qualitative examples grouped by the type of ambiguity or failure mode of the gaze-following baseline compared to MTGS-Hand or vice versa.
+            Each group illustrates a recurring behavior observed when comparing the two models.
         </div>
 
         <!-- Face-bias corrections -->
@@ -1736,104 +1734,105 @@ Format the equations using LaTeX and add them to the website like this:
 <!-- REFERENCES -->
 <!-- ====================================================== -->
 
-<section class="section">
-  <div class="container is-max-desktop">
 
-    <h2 class="title is-3">References</h2>
+<section class="section" id="references">
+  <div class="container is-max-desktop content">
 
-    <div class="content has-text-justified">
+    <h2 class="title">References</h2>
 
-      <p id="ref-johansson2001eye">
-        [1] Johansson, R. S., Westling, G., Bäckström, A., and Flanagan, J. R.
+    <ol>
+
+      <li id="ref-johansson2001eye">
+        Johansson, R. S., Westling, G., Bäckström, A., and Flanagan, J. R.
         <em>Eye-Hand Coordination in Object Manipulation.</em>
         Journal of Neuroscience, 2001.
-      </p>
+      </li>
 
-      <p id="ref-yu2013joint">
-        [2] Yu, C., and Smith, L. B.
+      <li id="ref-yu2013joint">
+        Yu, C., and Smith, L. B.
         <em>Joint Attention without Gaze Following.</em>
         Developmental Science, 2013.
-      </p>
+      </li>
 
-      <p id="ref-wilmut2006problems">
-        [3] Wilmut, K., Wann, J., and Brown, J.
+      <li id="ref-wilmut2006problems">
+        Wilmut, K., Wann, J., and Brown, J.
         <em>Problems in the coupling of eye and hand control in children with developmental coordination disorder.</em>
         Child: Care, Health and Development, 2006.
-      </p>
+      </li>
 
-      <p id="ref-rane2024automated">
-        [4] Rane, S. et al.
+      <li id="ref-rane2024automated">
+        Rane, S. et al.
         <em>Automated Analysis of Eye-Hand Coordination for Developmental Disorders.</em>
         2024.
-      </p>
+      </li>
 
-      <p id="ref-gupta2024mtgs">
-        [5] Gupta, A. et al.
+      <li id="ref-gupta2024mtgs">
+        Gupta, A. et al.
         <em>MTGS: Multi-Person Temporal Gaze Following.</em>
         CVPR, 2024.
-      </p>
+      </li>
 
-      <p id="ref-Ni_2023">
-        [6] Ni, X. et al.
+      <li id="ref-Ni_2023">
+        Ni, X. et al.
         <em>Human-Object Interaction Prediction using Gaze Cues.</em>
         ICCV, 2023.
-      </p>
+      </li>
 
-      <p id="ref-tian2026gazeguidedhandobjectinteractionsynthesis">
-        [7] Tian, Y. et al.
+      <li id="ref-tian2026gazeguidedhandobjectinteractionsynthesis">
+        Tian, Y. et al.
         <em>Gaze-Guided Hand-Object Interaction Synthesis.</em>
         2026.
-      </p>
+      </li>
 
-      <p id="ref-hu2025hoigaze">
-        [8] Hu, Z. et al.
+      <li id="ref-hu2025hoigaze">
+        Hu, Z. et al.
         <em>HOIGaze: Eye-Hand Coordination for XR Gaze Estimation.</em>
         2025.
-      </p>
+      </li>
 
-      <p id="ref-emery_vr_gaze">
-        [9] Emery, M. et al.
+      <li id="ref-emery_vr_gaze">
+        Emery, M. et al.
         <em>VR Gaze Estimation through Eye-Hand-Head Coordination.</em>
         2024.
-      </p>
+      </li>
 
-      <p id="ref-recasens2015gazefollow">
-        [10] Recasens, A. et al.
+      <li id="ref-recasens2015gazefollow">
+        Recasens, A. et al.
         <em>Where Are They Looking?</em>
         NeurIPS, 2015.
-      </p>
+      </li>
 
-      <p id="ref-chong2020detecting">
-        [11] Chong, E. et al.
+      <li id="ref-chong2020detecting">
+        Chong, E. et al.
         <em>Detecting Attended Visual Targets in Video.</em>
         CVPR, 2020.
-      </p>
+      </li>
 
-      <p id="ref-farkhondeh2024cphand">
-        [12] Farkhondeh, A. et al.
+      <li id="ref-farkhondeh2024cphand">
+        Farkhondeh, A. et al.
         <em>ChildPlay-Hand: Benchmarking Hand Interactions in ChildPlay.</em>
         2024.
-      </p>
+      </li>
 
-      <p id="ref-cao2025toward">
-        [13] Cao, Y. et al.
+      <li id="ref-cao2025toward">
+        Cao, Y. et al.
         <em>Toward Deictic Gesture Target Estimation using Gaze and Hand Cues.</em>
         2025.
-      </p>
+      </li>
 
-      <p id="ref-yang2026sam">
-        [14] Yang, H. et al.
+      <li id="ref-yang2026sam">
+        Yang, H. et al.
         <em>SAM-3D Body.</em>
         2026.
-      </p>
+      </li>
 
-      <p id="ref-tafasca2023childplay">
-        [15] Tafasca, S. et al.
+      <li id="ref-tafasca2023childplay">
+        Tafasca, S. et al.
         <em>ChildPlay: A Benchmark for Understanding Children’s Gaze and Interaction.</em>
         ICCV, 2023.
-      </p>
+      </li>
 
-    </div>
+    </ol>
 
   </div>
 </section>

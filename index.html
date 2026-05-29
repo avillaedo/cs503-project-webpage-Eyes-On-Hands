@@ -452,53 +452,75 @@
             </p>
           
             <h3 class="title is-4">Looking-at-Hands (LAHand)</h3>
-          
+
             <p>
-              In addition to gaze following,
-              we introduce a complementary task called
-              <strong>Looking-at-Hands (LAHand)</strong>.
+            In addition to gaze following, we introduce a complementary task called <b>Looking-at-Hands (LAHand)</b>, which explicitly models whether a person is attending to a specific hand in the scene.
             </p>
-          
+            
             <p>
-              For each person $i$ and hand $j$,
-              the task consists of predicting a binary label:
+            For each person \(i\) and hand \(j\), the task consists of predicting a binary label:
             </p>
-          
+            
             <p>
             \[
-            y_{ij} =
+            y_{ij}
+            =
             \begin{cases}
             1 & \text{if person } i \text{ is looking at hand } j \\
             0 & \text{otherwise}
             \end{cases}
             \]
             </p>
-          
+            
             <p>
-              Pairwise interaction representations are computed as:
+            To perform LAHand prediction, we generate all pairwise combinations between person tokens and hand tokens.
             </p>
-          
+            
+            <p>
+            Let \(p_i^{gaze}\) denote the gaze token corresponding to person \(i\), and \(p_j^{hand}\) the token corresponding to hand \(j\).
+            </p>
+            
+            <p>
+            We first construct pairwise interaction representations:
+            </p>
+            
             <p>
             \[
             q_{ij}
             =
-            [p_i^{gaze} \, \| \, p_j^{hand}]
+            [p_i^{gaze} \parallel p_j^{hand}],
             \]
             </p>
-          
+            
+            <p>
+            where \(\parallel\) denotes feature concatenation.
+            </p>
+            
+            <p>
+            The resulting pairwise features are processed by a dedicated LAHand decoder implemented as a multi-layer perceptron:
+            </p>
+            
             <p>
             \[
             s_{ij}
             =
-            D_{LAHand}(q_{ij})
+            D_{LAHand}(q_{ij}),
             \]
             </p>
-          
+            
+            <p>
+            where \(s_{ij}\) corresponds to the predicted attention score for the person-hand pair.
+            </p>
+            
+            <p>
+            During inference, logits are passed through a sigmoid activation to obtain probabilities:
+            </p>
+            
             <p>
             \[
             \hat{y}_{ij}
             =
-            \sigma(s_{ij})
+            \sigma(s_{ij}).
             \]
             </p>
           

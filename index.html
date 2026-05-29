@@ -741,6 +741,11 @@
             <!-- ====================================================== -->
           
             <h3 class="title is-4">Main Results</h3>
+            <p>
+              The following table compares MTGS-Hand
+              against the gaze-following baseline obtained
+              by removing the hand module and LAHand decoder.
+            </p>
           
             <div class="table-container">
               <table class="table is-bordered is-striped is-hoverable is-fullwidth">
@@ -766,11 +771,7 @@
               </table>
             </div>
           
-            <p>
-              Table~\ref{tab:gf_baseline} compares MTGS-Hand
-              against the gaze-following baseline obtained
-              by removing the hand module and LAHand decoder.
-            </p>
+
           
             <p>
               Incorporating explicit hand-aware interaction cues consistently improves
@@ -780,12 +781,16 @@
             </p>
           
             <!-- ====================================================== -->
+
+            <p>
+              The next figure evaluates person-hand attention prediction on GazeFollow.
+            </p>
           
             <div class="columns is-centered">
           
               <div class="column is-half">
                 <figure class="image">
-                  <img src="images/pr_pair_gf.png" alt="Pair-level precision recall">
+                  <img src="./static/images/pr_pair_gf.png" alt="Pair-level precision recall">
                   <figcaption class="has-text-centered">
                     Pair-level evaluation.
                   </figcaption>
@@ -794,7 +799,7 @@
           
               <div class="column is-half">
                 <figure class="image">
-                  <img src="images/pr_person_gf.png" alt="Person-level precision recall">
+                  <img src="./static/images/pr_person_gf.png" alt="Person-level precision recall">
                   <figcaption class="has-text-centered">
                     Person-level evaluation.
                   </figcaption>
@@ -803,9 +808,6 @@
           
             </div>
           
-            <p>
-              Figure~\ref{fig:lahand_pr} evaluates person-hand attention prediction on GazeFollow.
-            </p>
           
             <p>
               We compare the proposed LAHand decoder against the geometric baselines.

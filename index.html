@@ -1025,15 +1025,42 @@
               MTGS-Hand better handles:
             </p>
           
-            <p>
-              (i) ambiguous gaze targets,
-              (ii) cluttered multi-person scenes,
-              (iii) small or partially visible heads,
-              (iv) back-facing subjects,
-              and (v) occlusions caused by interactions and object manipulations.
-            </p>
+        <ol type="i">
+          <li>ambiguous gaze targets</li>
+          <li>cluttered multi-person scenes</li>
+          <li>small or partially visible heads</li>
+          <li>back-facing subjects</li>
+          <li>occlusions caused by interactions and object manipulations</li>
+        </ol>
+
+
+        <div class="has-text-centered comparison-note">
+          Left: <b>Ground Truth</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Center: <b>Gaze-Following Baseline</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Right: <b>MTGS-Hand (Ours)</b> 
+        </div>
+
+        <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+            <div id="main-paper-carousel" class="carousel results-carousel">
+              <a href="./static/images/qualitative_results/main/cp_low_resolution_people_far.jpg" data-lightbox="main-paper">
+                <img src="./static/images/qualitative_results/main/cp_low_resolution_people_far.jpg" alt="Low-resolution distant people example">
+              </a>
+
+              <a href="./static/images/qualitative_results/main/cp_bias_face2.jpg" data-lightbox="main-paper">
+                <img src="./static/images/qualitative_results/main/cp_bias_face2.jpg" alt="Face-bias correction example">
+              </a>
+
+              <a href="./static/images/qualitative_results/main/cp_cluttered_head_back.jpg" data-lightbox="main-paper">
+                <img src="./static/images/qualitative_results/main/cp_cluttered_head_back.jpg" alt="Cluttered back-facing subject example">
+              </a>
+            </div>
+          </div>
+        </section>
           
-            <figure class="image">
+            <!-- <figure class="image">
               <img src="images/outputs.png" alt="Qualitative outputs">
               <figcaption class="has-text-centered">
                 Qualitative outputs in low-resolution, densely crowded scenes
@@ -1041,7 +1068,7 @@
                 faces are not visible,
                 and identity attribution remains ambiguous.
               </figcaption>
-            </figure>
+            </figure> -->
           
             <p>
               These improvements arise from the explicit modeling
@@ -1139,31 +1166,6 @@
             Each group illustrates a recurring behavior observed when comparing the gaze-following baseline against MTGS-Hand.
           </p>
         </div>
-
-        <!-- Main-paper examples
-        <h3 class="title is-4">Representative Main-Paper Examples</h3>
-        <p>
-          These examples correspond to the main qualitative cases discussed in the paper: low-resolution distant people,
-          face-bias correction, and cluttered back-facing subjects.
-        </p>
-
-        <section class="section supplementary-carousel-section">
-          <div class="container is-max-desktop">
-            <div id="main-paper-carousel" class="carousel results-carousel">
-              <a href="./static/images/qualitative_results/main/cp_low_resolution_people_far.jpg" data-lightbox="main-paper">
-                <img src="./static/images/qualitative_results/main/cp_low_resolution_people_far.jpg" alt="Low-resolution distant people example">
-              </a>
-
-              <a href="./static/images/qualitative_results/main/cp_bias_face2.jpg" data-lightbox="main-paper">
-                <img src="./static/images/qualitative_results/main/cp_bias_face2.jpg" alt="Face-bias correction example">
-              </a>
-
-              <a href="./static/images/qualitative_results/main/cp_cluttered_head_back.jpg" data-lightbox="main-paper">
-                <img src="./static/images/qualitative_results/main/cp_cluttered_head_back.jpg" alt="Cluttered back-facing subject example">
-              </a>
-            </div>
-          </div>
-        </section> -->
 
         <!-- Face-bias corrections -->
         <h3 class="title is-4">Face-Bias Corrections</h3>

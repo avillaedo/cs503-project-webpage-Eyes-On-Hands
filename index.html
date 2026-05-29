@@ -222,6 +222,14 @@
                 </p>
               </a>
             </div>
+
+            <div class="tile is-parent">
+              <a href="#supplementary" class="tile is-child box">
+                <p class="subtitle">
+                  <font size="-1">Supplementary</font>
+                </p>
+              </a>
+            </div>
   </div>
 </section>
 
@@ -1115,6 +1123,391 @@
   </section>
 <!------------------------------------------------------------------------->
 
+
+<!-------------------------------- Supplementary Material -------------------------------->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h2 class="title is-3" id="supplementary">Supplementary Qualitative Results</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            This supplementary section provides additional qualitative examples grouped by the type of ambiguity or failure mode.
+            Each group illustrates a recurring behavior observed when comparing the gaze-following baseline against MTGS-Hand.
+          </p>
+        </div>
+
+        <!-- Main-paper examples
+        <h3 class="title is-4">Representative Main-Paper Examples</h3>
+        <p>
+          These examples correspond to the main qualitative cases discussed in the paper: low-resolution distant people,
+          face-bias correction, and cluttered back-facing subjects.
+        </p>
+
+        <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+            <div id="main-paper-carousel" class="carousel results-carousel">
+              <a href="./static/images/qualitative_results/main/cp_low_resolution_people_far.jpg" data-lightbox="main-paper">
+                <img src="./static/images/qualitative_results/main/cp_low_resolution_people_far.jpg" alt="Low-resolution distant people example">
+              </a>
+
+              <a href="./static/images/qualitative_results/main/cp_bias_face2.jpg" data-lightbox="main-paper">
+                <img src="./static/images/qualitative_results/main/cp_bias_face2.jpg" alt="Face-bias correction example">
+              </a>
+
+              <a href="./static/images/qualitative_results/main/cp_cluttered_head_back.jpg" data-lightbox="main-paper">
+                <img src="./static/images/qualitative_results/main/cp_cluttered_head_back.jpg" alt="Cluttered back-facing subject example">
+              </a>
+            </div>
+          </div>
+        </section> -->
+
+        <!-- Face-bias corrections -->
+        <h3 class="title is-4">Face-Bias Corrections</h3>
+        <p>
+          These examples show cases where the baseline is attracted toward visually salient faces,
+          while MTGS-Hand better identifies the interaction-relevant target using hand-aware cues.
+        </p>
+
+        <div class="has-text-centered comparison-note">
+          Left: <b>Ground Truth</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Center: <b>Gaze-Following Baseline</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Right: <b>MTGS-Hand (Ours)</b> 
+        </div>
+
+        <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+            <div id="face-bias-carousel" class="carousel results-carousel">
+              <a href="./static/images/qualitative_results/supplementary/face_bias/cp_face_bias.jpg" data-lightbox="face-bias">
+                <img src="./static/images/qualitative_results/supplementary/face_bias/cp_face_bias.jpg" alt="Face-bias example 1">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/face_bias/gf_bias_faces_back.jpg" data-lightbox="face-bias">
+                <img src="./static/images/qualitative_results/supplementary/face_bias/gf_bias_faces_back.jpg" alt="Face-bias example 2">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/face_bias/gf_bias_face_face_not_visible.jpg" data-lightbox="face-bias">
+                <img src="./static/images/qualitative_results/supplementary/face_bias/gf_bias_face_face_not_visible.jpg" alt="Face-bias example 3">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/face_bias/gf_bias_face.jpg" data-lightbox="face-bias">
+                <img src="./static/images/qualitative_results/supplementary/face_bias/gf_bias_face.jpg" alt="Face-bias example 4">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/face_bias/cp_bias_face.jpg" data-lightbox="face-bias">
+                <img src="./static/images/qualitative_results/supplementary/face_bias/cp_bias_face.jpg" alt="Face-bias example 5">
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Face not visible -->
+        <h3 class="title is-4">Face Not Visible or Back-Facing Subjects</h3>
+        <p>
+          These examples highlight situations where facial appearance and head orientation are unreliable.
+          In such cases, explicit hand-aware reasoning provides complementary interaction cues.
+        </p>
+
+        <div class="has-text-centered comparison-note">
+          Left: <b>Ground Truth</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Center: <b>Gaze-Following Baseline</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Right: <b>MTGS-Hand (Ours)</b> 
+        </div>
+
+        <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+            <div id="face-not-visible-carousel" class="carousel results-carousel">
+              <a href="./static/images/qualitative_results/supplementary/face_not_visible/gf_bias_face_face_not_visible.jpg" data-lightbox="face-not-visible">
+                <img src="./static/images/qualitative_results/supplementary/face_not_visible/gf_bias_face_face_not_visible.jpg" alt="Face not visible example 1">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/face_not_visible/gf_bias_faces_back.jpg" data-lightbox="face-not-visible">
+                <img src="./static/images/qualitative_results/supplementary/face_not_visible/gf_bias_faces_back.jpg" alt="Back-facing subject example 2">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/face_not_visible/cp_back_head_hand_competition.jpg" data-lightbox="face-not-visible">
+                <img src="./static/images/qualitative_results/supplementary/face_not_visible/cp_back_head_hand_competition.jpg" alt="Back-facing hand competition example 3">
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Eyes closed -->
+        <h3 class="title is-4">Closed or Weakly Visible Eyes</h3>
+        <p>
+          These examples show cases where the eyes are closed, low-resolution, or difficult to interpret.
+          MTGS-Hand can exploit interaction cues beyond facial appearance alone.
+        </p>
+
+        <div class="has-text-centered comparison-note">
+          Left: <b>Ground Truth</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Center: <b>Gaze-Following Baseline</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Right: <b>MTGS-Hand (Ours)</b> 
+        </div>
+
+        <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+            <div id="eyes-closed-carousel" class="carousel results-carousel">
+              <a href="./static/images/qualitative_results/supplementary/eyes_closed/gf_eyes_closed.jpg" data-lightbox="eyes-closed">
+                <img src="./static/images/qualitative_results/supplementary/eyes_closed/gf_eyes_closed.jpg" alt="Eyes closed example 1">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/eyes_closed/gf_low_res_eyes_closed.jpg" data-lightbox="eyes-closed">
+                <img src="./static/images/qualitative_results/supplementary/eyes_closed/gf_low_res_eyes_closed.jpg" alt="Low-resolution eyes closed example 2">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/eyes_closed/cp_hand_competition_eyes_closed.jpg" data-lightbox="eyes-closed">
+                <img src="./static/images/qualitative_results/supplementary/eyes_closed/cp_hand_competition_eyes_closed.jpg" alt="Hand competition with weakly visible eyes example 3">
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Hand competition -->
+        <h3 class="title is-4">Competition Between Multiple Hands</h3>
+        <p>
+          These examples contain multiple visible hands. They illustrate that MTGS-Hand can better resolve which hand
+          is relevant to the interaction, rather than relying only on geometric proximity.
+        </p>
+
+        <div class="has-text-centered comparison-note">
+          Left: <b>Ground Truth</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Center: <b>Gaze-Following Baseline</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Right: <b>MTGS-Hand (Ours)</b> 
+        </div>
+
+        <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+            <div id="hand-competition-carousel" class="carousel results-carousel">
+              <a href="./static/images/qualitative_results/supplementary/hand_competition/cp_back_head_hand_competition.jpg" data-lightbox="hand-competition">
+                <img src="./static/images/qualitative_results/supplementary/hand_competition/cp_back_head_hand_competition.jpg" alt="Hand competition example 1">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/hand_competition/cp_hand_competition.jpg" data-lightbox="hand-competition">
+                <img src="./static/images/qualitative_results/supplementary/hand_competition/cp_hand_competition.jpg" alt="Hand competition example 2">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/hand_competition/cp_hand_competition_eyes_closed.jpg" data-lightbox="hand-competition">
+                <img src="./static/images/qualitative_results/supplementary/hand_competition/cp_hand_competition_eyes_closed.jpg" alt="Hand competition example 3">
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- No hand bias -->
+        <h3 class="title is-4">No Systematic Bias Toward Hands</h3> 
+        <p>
+          This example shows that adding hand tokens does not simply bias the model toward hands.
+          When the correct gaze target is a face or person, MTGS-Hand can still identify the correct non-hand target.
+        </p> 
+
+        <div class="has-text-centered comparison-note">
+          Left: <b>Ground Truth</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Center: <b>Gaze-Following Baseline</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Right: <b>MTGS-Hand (Ours)</b> 
+        </div>
+
+        <!-- <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+            <div id="no-hand-bias-carousel" class="carousel results-carousel">
+              <a href="./static/images/qualitative_results/supplementary/cp_face_bias_kept_success.jpg" data-lightbox="no-hand-bias">
+                <img src="./static/images/qualitative_results/supplementary/cp_face_bias_kept_success.jpg" alt="No systematic hand bias example">
+              </a>
+            </div>
+          </div>
+        </section>  -->
+        <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+
+            <a href="./static/images/qualitative_results/supplementary/cp_face_bias_kept_success.jpg"
+              data-lightbox="no-hand-bias">
+
+              <img
+                src="./static/images/qualitative_results/supplementary/cp_face_bias_kept_success.jpg"
+                alt="No systematic hand bias example"
+                style="width:100%; border-radius:8px;">
+
+            </a>
+
+          </div>
+        </section>
+
+        <!-- Failure case -->
+        <h3 class="title is-4">Failure Case: Gaze and LAHand Inconsistency</h3>
+        <p>
+          This failure case shows an inconsistency between gaze prediction and LAHand prediction.
+          Since the gaze-following and LAHand objectives are decoded through separate heads,
+          future work could enforce stronger consistency between gaze heatmaps and person-hand attention predictions.
+        </p>
+
+        <!-- <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+            <div id="failure-carousel" class="carousel results-carousel">
+              <a href="./static/images/qualitative_results/supplementary/failure_inconsistency.jpg" data-lightbox="failure">
+                <img src="./static/images/qualitative_results/supplementary/failure_inconsistency.jpg" alt="Gaze and LAHand inconsistency failure case">
+              </a>
+            </div>
+          </div>
+        </section> -->
+        <div class="has-text-centered comparison-note">
+          Left: <b>Ground Truth</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Center: <b>Gaze-Following Baseline</b> 
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          Right: <b>MTGS-Hand (Ours)</b> 
+        </div>
+        <section class="section supplementary-carousel-section">
+  <div class="container is-max-desktop">
+
+    <a href="./static/images/qualitative_results/supplementary/failure_inconsistency.jpg"
+       data-lightbox="failure">
+
+      <img
+        src="./static/images/qualitative_results/supplementary/failure_inconsistency.jpg"
+        alt="Gaze and LAHand inconsistency failure case"
+        style="width:100%; border-radius:8px;">
+
+    </a>
+
+  </div>
+</section>
+
+        <!-- Hand-center loss -->
+        <h3 class="title is-4">Effect of the Hand-Center Auxiliary Loss</h3>
+
+        <p>
+          The final MTGS-Hand model includes an auxiliary hand-center regression objective
+          that encourages the model to localize the attended hand more accurately.
+          The orange visualization corresponds to the hand-center target used for regression,
+          while the blue visualization shows the corresponding hand selected by the LAHand annotations.
+        </p>
+        
+
+        <p>
+          By explicitly encouraging the model to predict the location of attended hands,
+          this auxiliary objective provides additional supervision linking gaze behavior
+          to hand-centered interactions. As shown in the quantitative ablation study,
+          adding the hand-center loss improves both LAHand performance and gaze-following metrics.
+        </p>
+       <p class="has-text-centered" style="margin-top: 1rem;">
+  <b>Left:</b> Without Hand-Center Loss &nbsp;&nbsp;|&nbsp;&nbsp;
+  <b>Right:</b> With Hand-Center Loss
+</p>
+
+
+        <section class="section supplementary-carousel-section">
+          <div class="container is-max-desktop">
+            <div id="hand-center-loss-carousel" class="carousel results-carousel">
+
+              <a href="./static/images/qualitative_results/supplementary/hand_center_loss/hand_center_loss_1.png" data-lightbox="hand-center-loss">
+                <img src="./static/images/qualitative_results/supplementary/hand_center_loss/hand_center_loss_1.png" alt="Hand-center auxiliary loss example 1">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/hand_center_loss/hand_center_loss_2.png" data-lightbox="hand-center-loss">
+                <img src="./static/images/qualitative_results/supplementary/hand_center_loss/hand_center_loss_2.png" alt="Hand-center auxiliary loss example 2">
+              </a>
+              <a href="./static/images/qualitative_results/supplementary/hand_center_loss/hand_center_loss_1.png" data-lightbox="hand-center-loss">
+                <img src="./static/images/qualitative_results/supplementary/hand_center_loss/hand_center_loss_1.png" alt="Hand-center auxiliary loss example 1">
+              </a>
+
+              <a href="./static/images/qualitative_results/supplementary/hand_center_loss/hand_center_loss_2.png" data-lightbox="hand-center-loss">
+                <img src="./static/images/qualitative_results/supplementary/hand_center_loss/hand_center_loss_2.png" alt="Hand-center auxiliary loss example 2">
+              </a>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- Hand representation -->
+        <h3 class="title is-4">Analysis of Hand Representations</h3>
+
+<p>
+  We visualize t-SNE projections of hand representations colored according to clusters obtained from the raw hand
+  joint features. The left plot shows the original hand joint features, while the right plot shows the corresponding
+  encoded hand representations produced by the hand adaptor.
+</p>
+
+<div class="columns is-centered">
+
+  <div class="column is-6">
+    <a href="./static/images/qualitative_results/supplementary/hand_representation/tsne_raw_joints_by_raw_kmeans.png"
+       data-lightbox="tsne">
+
+      <img
+        src="./static/images/qualitative_results/supplementary/hand_representation/tsne_raw_joints_by_raw_kmeans.png"
+        class="supp-tsne-image">
+
+    </a>
+
+    <p class="has-text-centered is-size-7 mt-2">
+      Raw hand joint features
+    </p>
+  </div>
+
+  <div class="column is-6">
+    <a href="./static/images/qualitative_results/supplementary/hand_representation/tsne_adaptor_after_by_raw_kmeans.png"
+       data-lightbox="tsne">
+
+      <img
+        src="./static/images/qualitative_results/supplementary/hand_representation/tsne_adaptor_after_by_raw_kmeans.png"
+        class="supp-tsne-image">
+
+    </a>
+
+    <p class="has-text-centered is-size-7 mt-2">
+      Encoded hand representations
+    </p>
+  </div>
+
+</div>
+
+<p>
+  The hand adaptor preserves and refines information related to hand manipulation patterns. However, substantial
+  overlap remains between several clusters, indicating that manipulation semantics are not explicitly disentangled
+  in the learned representation.
+</p>
+<section class="section supplementary-carousel-section">
+  <div class="container is-max-desktop">
+
+    <a href="./static/images/qualitative_results/supplementary/hand_representation/lahand_prob_manip.png"
+       data-lightbox="hand-representation">
+
+      <img
+        src="./static/images/qualitative_results/supplementary/hand_representation/lahand_prob_manip.png"
+        alt="LAHand probability conditioned on manipulation class"
+        style="width:100%; border-radius:8px;">
+
+    </a>
+
+  </div>
+</section>
+
+        <p>
+          The LAHand probability by manipulation class further suggests a relationship between hand manipulation patterns
+          and social attention behavior. Explicitly modeling manipulation semantics may therefore provide additional cues
+          for person-hand attention prediction.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-----------------------------TODO: VISUAL ITEMS THAT CAN BE USED-------------------------------->
   <!--
   <section class="section">
@@ -1251,7 +1644,6 @@ Format the equations using LaTeX and add them to the website like this:
         </div>
       </div>
     </section>
-    -->
 <!--------------------------------->
 <h3 class="title is-4">Table</h3>
 
@@ -1334,6 +1726,24 @@ Format the equations using LaTeX and add them to the website like this:
               </div>
             </div>
           </footer>
+<script>
+  bulmaCarousel.attach('.carousel', {
+    slidesToScroll: 1,
+    slidesToShow: 1,
+    loop: true,
+    infinite: true,
+    autoplay: false,
+  });
+</script>
 
+<script>
+  bulmaCarousel.attach('#hand-center-loss-carousel', {
+    slidesToScroll: 1,
+    slidesToShow: 1,
+    loop: true,
+    infinite: true,
+    autoplay: false,
+  });
+</script>
 </body>
 </html>

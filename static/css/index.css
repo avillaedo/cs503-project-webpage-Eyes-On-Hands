@@ -155,3 +155,28 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
+
+.supplementary-carousel-section {
+  padding-top: 1rem;
+  padding-bottom: 2.5rem;
+}
+
+.results-carousel img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+.supp-tsne-image {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.comparison-note {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}

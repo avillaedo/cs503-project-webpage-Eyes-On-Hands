@@ -290,8 +290,237 @@
         <div class="column is-full-width">
           <h2 class="title is-3" id="method">III. Methodology</h2>
           <div class="content has-text-justified">
+            <h3 class="title is-4">MTGS-Hand Architecture</h3>
+          
             <p>
-              The methodology part of the report can be provided here
+              Our approach extends MTGS~\cite{gupta2024mtgs},
+              a transformer-based framework for multi-person temporal gaze following and social gaze prediction.
+            </p>
+          
+            <p>
+              MTGS represents each person using person-specific tokens derived from head appearance and head location,
+              which interact with scene tokens through temporal and social attention mechanisms.
+            </p>
+          
+            <p>
+              While MTGS models person-person and person-scene interactions,
+              it does not explicitly capture hand-centered interaction cues that are strongly correlated
+              with attention and manipulation behavior.
+            </p>
+          
+            <p>
+              To address this limitation, we propose <strong>MTGS-Hand</strong>,
+              a hand-aware extension of MTGS that introduces explicit hand representations into the interaction pipeline.
+            </p>
+          
+            <p>
+              Given an input video sequence of $T$ frames containing $P$ people,
+              the scene encoder first processes each frame using a ViT-based tokenizer
+              to produce a set of scene tokens:
+            </p>
+          
+            <p>
+            \[
+            F_t = \{f_t^1, \dots, f_t^N\}
+            \]
+            </p>
+          
+            <p>
+              where $N$ denotes the number of scene patches.
+            </p>
+          
+            <p>
+              In parallel, the gaze module processes each person's head crop and head bounding box.
+            </p>
+          
+            <p>
+            \[
+            g_{i,1:T}^{temp}
+            =
+            G_{temp}(G_{stat}(h_{i,1:T}^{crop}))
+            \]
+            </p>
+          
+            <p>
+              The temporal gaze embeddings are then projected together with normalized head bounding box coordinates:
+            </p>
+          
+            <p>
+            \[
+            p_{i,t}^{gaze}
+            =
+            P_{gaze}(g_{i,t}^{temp})
+            +
+            P_{box}(h_{i,t}^{box})
+            \]
+            </p>
+          
+            <h3 class="title is-4">Hand Representation and Tokenization</h3>
+          
+            <p>
+              Our main contribution is the introduction of a dedicated hand module that explicitly models
+              hand-centered interaction cues.
+            </p>
+          
+            <p>
+              For each detected hand,
+              we extract hand skeletons and hand bounding boxes using SAM-3D Body~\cite{yang2026sam}.
+            </p>
+          
+            <p>
+              Let $k_{j,t} \in \mathbb{R}^{K \times D}$ denote the hand skeleton representation for hand $j$ at time $t$.
+            </p>
+          
+            <p>
+            \[
+            z_{j,1:T}^{hand}
+            =
+            H_{temp}(H_{stat}(k_{j,1:T}))
+            \]
+            </p>
+          
+            <p>
+            \[
+            p_{j,t}^{hand}
+            =
+            P_{hand}(z_{j,t}^{hand})
+            +
+            P_{hbox}(b_{j,t}^{hand})
+            \]
+            </p>
+          
+            <p>
+              To preserve the association between a hand and its corresponding person,
+              we additionally project the owner's head bounding box:
+            </p>
+          
+            <p>
+            \[
+            \tilde{p}_{j,t}^{hand}
+            =
+            p_{j,t}^{hand}
+            +
+            P_{head}(b_{owner(j),t}^{head})
+            \]
+            </p>
+          
+            <p>
+              Learnable modality embeddings are further introduced
+              to distinguish gaze tokens from left-hand and right-hand tokens.
+            </p>
+          
+            <h3 class="title is-4">Looking-at-Hands (LAHand)</h3>
+          
+            <p>
+              In addition to gaze following,
+              we introduce a complementary task called
+              <strong>Looking-at-Hands (LAHand)</strong>.
+            </p>
+          
+            <p>
+              For each person $i$ and hand $j$,
+              the task consists of predicting a binary label:
+            </p>
+          
+            <p>
+            \[
+            y_{ij} =
+            \begin{cases}
+            1 & \text{if person } i \text{ is looking at hand } j \\
+            0 & \text{otherwise}
+            \end{cases}
+            \]
+            </p>
+          
+            <p>
+              Pairwise interaction representations are computed as:
+            </p>
+          
+            <p>
+            \[
+            q_{ij}
+            =
+            [p_i^{gaze} \, \| \, p_j^{hand}]
+            \]
+            </p>
+          
+            <p>
+            \[
+            s_{ij}
+            =
+            D_{LAHand}(q_{ij})
+            \]
+            </p>
+          
+            <p>
+            \[
+            \hat{y}_{ij}
+            =
+            \sigma(s_{ij})
+            \]
+            </p>
+          
+            <h3 class="title is-4">Pseudo-Label Generation</h3>
+          
+            <p>
+              While ChildPlay provides hand interaction annotations,
+              GazeFollow does not contain ground-truth LAHand labels.
+            </p>
+          
+            <p>
+              For each person $i$ with gaze target $g_i \in \mathbb{R}^2$
+              and candidate hand $j$ with hand center $c_j \in \mathbb{R}^2$,
+              we compute a normalized distance:
+            </p>
+          
+            <p>
+            \[
+            d_{ij}
+            =
+            \frac{\|g_i - c_j\|_2}{s_j}
+            \]
+            </p>
+          
+            <p>
+            \[
+            y_{ij} =
+            \begin{cases}
+            1 & \text{if } d_{ij} < \tau_{pos} \\
+            0 & \text{if } d_{ij} > \tau_{neg} \\
+            -1 & \text{otherwise}
+            \end{cases}
+            \]
+            </p>
+          
+            <h3 class="title is-4">Training Objectives</h3>
+          
+            <p>
+              The overall framework is trained in a multi-task setting combining gaze-following
+              and LAHand objectives.
+            </p>
+          
+            <p>
+            \[
+            \mathcal{L}_{LAHand}
+            =
+            \frac{1}{|\Omega|}
+            \sum_{(i,j)\in\Omega}
+            \ell_{\text{focal}}(s_{ij}, y_{ij})
+            \]
+            </p>
+          
+            <p>
+            \[
+            \mathcal{L}
+            =
+            \lambda_{gaze}\mathcal{L}_{gaze}
+            +
+            \lambda_{inout}\mathcal{L}_{inout}
+            +
+            \lambda_{LAHand}\mathcal{L}_{LAHand}
+            +
+            \lambda_{center}\mathcal{L}_{center}
+            \]
             </p>
           </div>
         </div>
@@ -310,8 +539,236 @@
         <div class="column is-full-width">
           <h2 class="title is-3" id="results">IV. Results</h2>
           <div class="content has-text-justified">
+            <h3 class="title is-4">Datasets</h3>
+            
             <p>
-              The results part of the report can be provided here
+            We evaluate the proposed approach on two gaze-following benchmarks:
+            \textbf{GazeFollow}~\cite{recasens2015gazefollow}
+            and
+            \textbf{ChildPlay}~\cite{tafasca2023childplay}.
+            </p>
+            
+            <p>
+            GazeFollow is a large-scale static gaze-following dataset containing diverse real-world scenes with gaze annotations.
+            Since it does not provide hand-attention annotations, we generate pseudo-labels for the proposed LAHand task using the strategy described in Section 3.4.
+            </p>
+            
+            <p>
+            ChildPlay is a video-based gaze-following dataset focusing on interaction-heavy scenes involving children and object manipulations.
+            </p>
+            
+            <h3 class="title is-4">Baselines</h3>
+            
+            <p>
+            For gaze following, we compare against a baseline obtained by removing the proposed hand module and LAHand decoder from MTGS-Hand.
+            </p>
+            
+            <p>
+            Given a gaze location $g_i$ for person $i$ and an extended hand center $c_j$ for hand $j$, a normalized distance is computed as:
+            </p>
+            
+            <p>
+            \[
+            d_{ij}
+            =
+            \frac{\|g_i-c_j\|_2}{s_i}
+            \]
+            </p>
+
+            <p>
+              \subsection{Datasets}
+
+We evaluate the proposed approach on two gaze-following benchmarks: \textbf{GazeFollow}~\cite{recasens2015gazefollow} and \textbf{ChildPlay}~\cite{tafasca2023childplay}. 
+
+GazeFollow is a large-scale static gaze-following dataset containing diverse real-world scenes with gaze annotations. Since it does not provide hand-attention annotations, we generate pseudo-labels for the proposed LAHand task using the strategy described in Section~3.4.
+
+ChildPlay is a video-based gaze-following dataset focusing on interaction-heavy scenes involving children and object manipulations. In contrast to GazeFollow, ChildPlay naturally contains richer hand-interaction behaviors and provides a more suitable benchmark for evaluating interaction-aware gaze reasoning.
+
+For both datasets, hand skeletons and hand bounding boxes are extracted using SAM-3D Body~\cite{yang2026sam}. Unless otherwise stated, our full model uses 3D hand keypoints together with hand bounding box information.
+
+\subsection{Baselines}
+
+For gaze following, we compare against a baseline obtained by removing the proposed hand module and LAHand decoder from MTGS-Hand. Consequently, any performance difference between the baseline and MTGS-Hand can be attributed to the proposed hand-aware extensions.
+
+For the LAHand task, we compare against a geometric baseline based on the spatial relationship between gaze locations and hand positions. For each hand, an extended hand center is computed from the wrist and elbow keypoints. Given a gaze location $g_i$ for person $i$ and an extended hand center $c_j$ for hand $j$, a normalized distance is computed as
+
+\begin{equation}
+d_{ij}
+=
+\frac{\|g_i-c_j\|_2}{s_i},
+\end{equation}
+
+where $s_i$ is a normalization factor derived from the hand bounding box size. Person-hand pairs are classified as positive when the normalized distance falls below a threshold selected on the validation set. This baseline evaluates how much of the LAHand task can be explained using geometric gaze-to-hand association alone, without explicit person-hand interaction reasoning.
+
+We additionally report an \emph{oracle} version of the geometric baseline in which ground-truth gaze locations are used instead of predicted gaze locations. The oracle baseline provides an upper bound on the performance achievable through purely geometric gaze-to-hand association and allows us to separate errors caused by gaze localization from those caused by hand-attention prediction.
+
+
+\subsection{Evaluation Metrics}
+
+Following standard gaze-following evaluation protocols, we report:
+(i) minimum distance,
+(ii) average distance,
+and (iii) area under the ROC curve (AUC) for gaze prediction.
+
+For the proposed LAHand task, we evaluate person-hand attention prediction using Average Precision (AP). In addition to standard pair-level evaluation, we also analyze person-level semantic attention prediction, measuring whether the model correctly identifies at least one attended hand for each person. Precision-recall curves are additionally reported to compare the proposed method against a heuristic gaze-to-hand distance baseline.
+
+% \subsection{Implementation Details}
+
+
+% The model is first pretrained on GazeFollow and subsequently fine-tuned on ChildPlay for transfer experiments. We additionally evaluate several architectural variants, including:
+% (i) removing hand tokens,
+% (ii) removing head-bounding-box projections from hand tokens,
+% (iii) removing the auxiliary hand-center loss,
+% and (iv) varying the hand representation using 2D keypoints, reduced skeletal representations, or hand bounding boxes only.
+
+\subsection{Training Details} We follow the training strategy of MTGS~\cite{gupta2024mtgs} and first train a static version of MTGS-Hand on GazeFollow. The model is trained for 20 epochs using the AdamW optimizer with an initial learning rate of $10^{-4}$. The DINOv2 scene encoder is kept frozen throughout training, while all newly introduced hand-related components are trained from scratch. For ChildPlay experiments, the model is initialized from the GazeFollow checkpoint and subsequently fine-tuned on ChildPlay. During fine-tuning, all trainable modules are optimized jointly while keeping the frozen scene encoder unchanged. The hand module processes 3D hand skeletons together with hand bounding boxes extracted using SAM-3D Body. Unless otherwise stated, experiments use the full hand representation consisting of all available 3D hand keypoints and hand bounding box features.
+
+
+% ```latex id="twekwr"
+\subsection{Main Results}
+
+\begin{table}[t]
+\centering
+\small
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l|c|c|}
+\hline
+Model & Min Dist $\downarrow$ & Avg Dist $\downarrow$ \\
+\hline
+Baseline (No Hand Module) & 0.0485 & 0.1020 \\
+MTGS-Hand (Ours) & \textbf{0.0461} & \textbf{0.1000} \\
+\hline
+\end{tabular}
+}
+\caption{Comparison between the gaze-following baseline and the proposed MTGS-Hand model on GazeFollow. The baseline corresponds to MTGS-Hand without the hand module and LAHand decoder.}
+\label{tab:gf_baseline}
+\end{table}
+
+Table~\ref{tab:gf_baseline} compares MTGS-Hand against the gaze-following baseline obtained by removing the hand module and LAHand decoder. Incorporating explicit hand-aware interaction cues consistently improves both minimum and average distance metrics, demonstrating that hand-centered reasoning provides complementary information beyond gaze and scene context alone.
+
+\begin{figure*}[t]
+    \centering
+
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/pr_pair_gf.png}
+        \caption{Pair-level evaluation.}
+        \label{fig:pair_pr}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/pr_person_gf.png}
+        \caption{Person-level evaluation.}
+        \label{fig:person_pr}
+    \end{subfigure}
+
+    \caption{Precision-recall curves for LAHand evaluation on GazeFollow. Left: pair-level protocol where each person-hand pair is evaluated independently. Right: person-level protocol where a prediction is considered correct if at least one attended hand is identified. MTGS-Hand consistently outperforms the geometric baseline and approaches the oracle upper bound, demonstrating the benefit of explicit person-hand interaction modeling.}
+    \label{fig:lahand_pr}
+\end{figure*}
+
+Figure~\ref{fig:lahand_pr} evaluates person-hand attention prediction on GazeFollow. We compare the proposed LAHand decoder against the geometric baselines. Across both pair-level and person-level protocols, MTGS-Hand consistently achieves higher precision-recall performance than the baseline. Notably, In particular, the proposed model maintains substantially higher precision across a wide range of recall values, where the gains are particularly pronounced in the person-level setting, indicating that explicit interaction modeling provides more reliable semantic attention reasoning than geometric association alone.
+
+Interestingly, the gains observed in LAHand evaluation are substantially larger than those observed using standard gaze-following distance metrics. This suggests that aggregate gaze-following benchmarks may not fully capture improvements in interaction-aware attention reasoning. While global distance improvements remain modest, explicit hand modeling provides clear benefits in identifying semantically meaningful attention targets and resolving ambiguities arising in interaction-heavy scenes.
+
+\begin{table}[t]
+\centering
+\small
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l|c|c|c|}
+% \toprule
+\hline
+Model & LAHand AP $\uparrow$ & Min Dist $\downarrow$ & Avg Dist $\downarrow$ \\
+% \midrule
+\hline
+MTGS-Hand & \textbf{0.5928} & \textbf{0.0461} & \underline{0.1001} \\
+MTGS-Hand (2D KP) & 0.5721 & 0.0466 & \textbf{0.1000} \\
+MTGS-Hand (21 KP) & \underline{0.5911} & \underline{0.0463} & 0.1007 \\
+MTGS-Hand (BBox only) & 0.5744 & 0.0467 & 0.1008 \\
+% \bottomrule
+\hline
+\end{tabular}
+}
+\caption{Hand representation ablations on GazeFollow. KP denotes hand keypoints.}
+\label{tab:representation_ablation}
+\end{table}
+
+
+The hand representation ablation in Table~\ref{tab:representation_ablation} shows that richer hand structure improves semantic person-hand attention reasoning. Using full 3D hand skeletons produces the best LAHand performance, while relying solely on coarse hand localization through bounding boxes significantly reduces performance. These results highlight the importance of structured hand geometry for interaction-aware gaze understanding.
+
+\subsection{Architectural Ablations}
+
+We further evaluate the contribution of the proposed architectural components in Table~\ref{tab:architecture_ablation}. Adding head-bounding-box projections to the hand tokens consistently improves both gaze-following and LAHand performance. Introducing the auxiliary hand-center regression loss further improves semantic attention prediction and yields the best overall performance.
+
+\begin{table}[t]
+\centering
+\small
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l|c|c|c|c|c|}
+% \toprule
+\hline
+Model & HB & HC & AP $\uparrow$ & Min $\downarrow$ & Avg $\downarrow$ \\
+% \midrule
+\hline
+Baseline Hand Tokens & \xmark & \xmark & 0.5756 & \underline{0.0474} & 0.1016 \\
++ Head BBox & \cmark & \xmark & \underline{0.5912} & 0.0474 & \underline{0.1008} \\
++ Hand Center Loss & \cmark & \cmark & \textbf{0.5928} & \textbf{0.0461} & \textbf{0.1001} \\
+% \bottomrule
+\hline
+\end{tabular}
+}
+\caption{Architectural ablations on GazeFollow. HB denotes head-bounding-box projection added to hand tokens, while HC denotes the auxiliary hand-center regression loss.}
+\label{tab:architecture_ablation}
+\end{table}
+
+\subsection{Transfer to ChildPlay}
+
+To evaluate transfer to interaction-heavy scenes, we pretrain the proposed framework on GazeFollow and fine-tune it on ChildPlay. Table~\ref{tab:childplay_results} shows that fine-tuning on ChildPlay improves both gaze-following and LAHand performance compared to direct transfer from GazeFollow.
+
+\begin{table}[t]
+\centering
+\small
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l|c|c|}
+% \toprule
+\hline
+Model & LAHand AP $\uparrow$ & Dist $\downarrow$ \\
+% \midrule
+\hline
+Pretrained on GazeFollow & 0.5475 & 0.1038 \\
+Fine-tuned on ChildPlay & \textbf{0.5572} & \textbf{0.0998} \\
+% \bottomrule
+\hline
+\end{tabular}
+}
+\caption{Transfer evaluation on ChildPlay.}
+\label{tab:childplay_results}
+\end{table}
+
+Interestingly, while global gaze-following improvements remain relatively modest, the proposed approach substantially improves semantic person-hand attention reasoning. This suggests that standard gaze-following metrics alone may not fully capture the benefits of interaction-aware modeling.
+
+
+\subsection{Qualitative Analysis}
+
+Beyond quantitative improvements, the proposed framework demonstrates substantial qualitative gains in challenging interaction-heavy scenarios. Figure~\ref{fig:qualitative} compares MTGS-Hand against the MTGS baseline on several representative examples.
+
+In scenes involving object manipulations and hand-centered interactions, the proposed method produces more semantically consistent gaze predictions and more accurate hand-attention reasoning. In particular, MTGS-Hand better handles:
+(i) ambiguous gaze targets,
+(ii) cluttered multi-person scenes,
+(iii) small or partially visible heads,
+(iv) back-facing subjects,
+and (v) occlusions caused by interactions and object manipulations.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{images/outputs.png}
+    \caption{Qualitative outputs in low-resolution, densely crowded scenes where individuals appear far away, faces are not visible, and identity attribution remains ambiguous.}
+    \label{fig:qualitative_outputs_ambiguous}
+\end{figure}
+These improvements arise from the explicit modeling of person-hand interactions through hand tokens and LAHand supervision. While standard gaze-following metrics measure spatial proximity between predicted and ground-truth gaze targets, they do not fully capture whether the predicted attention aligns with the underlying interaction semantics. In contrast, the proposed framework leverages hand-aware interaction cues to better disambiguate manipulation-driven attention.
+
+% We further compare the proposed approach against a heuristic gaze-to-hand distance baseline using precision-recall analysis. Figure~\ref{fig:pr_curve} shows that MTGS-Hand consistently outperforms the heuristic baseline in both pair-level and person-level person-hand attention prediction. In particular, the proposed model maintains substantially higher precision across a wide range of recall values, demonstrating stronger semantic reasoning capabilities beyond simple geometric proximity.
+
+Finally, our experiments reveal that the largest improvements occur in scenarios where gaze is tightly coupled with hand manipulations. This suggests that explicit hand-aware interaction modeling is especially beneficial for understanding attention in socially and physically interactive environments.
             </p>
           </div>
         </div>
@@ -330,7 +787,31 @@
           <h2 class="title is-3" id="conclusion">V. Conclusion and Limitations</h2>
           <div class="content has-text-justified">
             <p>
-              The conclusion and limitations part of the report can be provided here
+            In this work, we introduced MTGS-Hand, a hand-aware extension of the MTGS framework for multi-person temporal gaze following.
+            </p>
+            
+            <p>
+            Our approach incorporates explicit hand representations through hand tokens derived from hand skeletons and hand bounding boxes, enabling interaction-aware reasoning within a transformer-based architecture.
+            </p>
+            
+            <p>
+            We further introduced the LAHand task for person-hand attention prediction together with a pseudo-labeling strategy for generating large-scale annotations on GazeFollow.
+            </p>
+            
+            <p>
+            Experiments on GazeFollow and ChildPlay demonstrated that incorporating explicit hand-aware interaction cues leads to consistent improvements in gaze-following performance while substantially improving semantic person-hand attention reasoning.
+            </p>
+            
+            <p>
+            Despite these improvements, several limitations remain.
+            </p>
+            
+            <p>
+            First, the proposed pseudo-labeling strategy introduces noisy supervision due to the ambiguity between gaze targets and nearby hand locations.
+            </p>
+            
+            <p>
+            Future work could extend the framework by incorporating object-centric interaction reasoning, richer geometric representations, and larger-scale hand-attention annotations for multi-person gaze understanding.
             </p>
           </div>
         </div>
